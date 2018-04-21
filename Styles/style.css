@@ -5,8 +5,16 @@ button{
   border-radius: 4px;
 }
 #check{
-  position:relative;
-  width: 100px;
+  position:fixed;
+  margin-top: 10px;
+  margin-left: 310px;
+  width: 120px;
+  border-width: 6px;
+  border-color: rgb(150, 150, 150);
+  background-color: rgb(230, 230, 230);
+  font-family: Coiny;
+  font-size: 20px;
+  text-align: center;
 }
 .w{
   background-color: rgb(230, 230, 230);

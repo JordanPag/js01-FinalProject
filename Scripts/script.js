@@ -1,6 +1,35 @@
 /*
 buttons format: [column][row][color, xPos, yPos]
 */
+let level = 0;
+let levelList =
+[
+  [
+    [['w'], ['w'], ['w'], ['w']],
+    [['w'], ['w'], ['w'], ['w']],
+    [['b'], ['b'], ['b'], ['b']],
+    [['b'], ['b'], ['b'], ['b']]
+  ],
+  [
+    [['w'], ['w'], ['w'], ['w']],
+    [['w'], ['w'], ['w'], ['w']],
+    [['w'], ['w'], ['w'], ['w']],
+    [['w'], ['w'], ['w'], ['w']]
+  ],
+  [
+    [['b'], ['w'], ['w'], ['b']],
+    [['b'], ['b'], ['w'], ['b']],
+    [['b'], ['w'], ['b'], ['b']],
+    [['b'], ['w'], ['w'], ['b']]
+  ],
+  [
+    [['w'], ['b'], ['w'], ['b'], ['w']],
+    [['b'], ['w'], ['b'], ['w'], ['b']],
+    [['w'], ['b'], ['w'], ['b'], ['w']],
+    [['b'], ['w'], ['b'], ['w'], ['b']],
+    [['w'], ['b'], ['w'], ['b'], ['w']]
+  ]
+];
 function mL(a){ //makeLevel with array
 
   //make buttons (according to a)
@@ -43,11 +72,8 @@ function mL(a){ //makeLevel with array
       $("body").append(b);
     }
   }
-  let c = $("<button></button>"); //checker
-  c.attr('id', 'check')
-  $("body").append("<button> Check </button>");
-  oA = a; //originalArray TODO add reset button
 }
+
 mL(
   [
     [['b'], ['w'], ['w']],
@@ -56,23 +82,33 @@ mL(
   ]
 );
 
-mL(
-  [
-    [['w'], ['w'], ['w'], ['w']],
-    [['w'], ['w'], ['w'], ['w']],
-    [['b'], ['b'], ['b'], ['b']],
-    [['b'], ['b'], ['b'], ['b']]
-  ]
-)
-
-
-
-//TODO make win condition (somewhere)
-/* let won = true
-for(let k = 0; k < a.length; k++){
-  for(let l = 0; l < a[0].length; l++){
-    if(a[k][l][0] == 'w'){
-      won = false;
-    }
+let c = $("<button></button>"); //checker
+c.attr('id', 'check')
+c.click( () => {
+  if($(".w").length == 0){
+    level++;
+    $(".b").remove();
+    const currentLevel = [...levelList[level - 1]];
+    mL(currentLevel);
+    c.text("Level " + (level + 1));
   }
-} */
+  else{
+    const currentLevel = [...levelList[level - 1]];
+    $(".b, .w").remove();
+    mL(currentLevel);
+  }
+});
+c.text("Level " + (level + 1));
+$("body").append(c);
+
+/*
+let c = $("<button></button>"); //checker
+c.attr('id', 'check')
+c.click( () => {
+  if($(".w").length == 0){
+    $(".b").remove();
+  }
+});
+c.text("Check")
+$("body").append(c);
+*/
