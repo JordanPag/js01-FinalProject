@@ -5,6 +5,11 @@ let level = 0;
 let levelList =
 [
   [
+    [['b'], ['w'], ['w']],
+    [['w'], ['b'], ['w']],
+    [['w'], ['w'], ['b']]
+  ],
+  [
     [['w'], ['w'], ['w'], ['w']],
     [['w'], ['w'], ['w'], ['w']],
     [['b'], ['b'], ['b'], ['b']],
@@ -74,31 +79,21 @@ function mL(a){ //makeLevel with array
   }
 }
 
-mL(
-  [
-    [['b'], ['w'], ['w']],
-    [['w'], ['b'], ['w']],
-    [['w'], ['w'], ['b']]
-  ]
-);
-
 let c = $("<button></button>"); //checker
 c.attr('id', 'check')
 c.click( () => {
   if($(".w").length == 0){
     level++;
     $(".b").remove();
-    const currentLevel = [...levelList[level - 1]];
-    mL(currentLevel);
-    c.text("Level " + (level + 1));
+    mL(JSON.parse(JSON.stringify(levelList[level - 1])));
+    c.text("Level " + (level));
   }
   else{
-    const currentLevel = [...levelList[level - 1]];
     $(".b, .w").remove();
-    mL(currentLevel);
+    mL(JSON.parse(JSON.stringify(levelList[level - 1])));
   }
 });
-c.text("Level " + (level + 1));
+c.text("Start");
 $("body").append(c);
 
 /*
